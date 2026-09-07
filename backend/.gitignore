@@ -1,0 +1,12 @@
+node_modules/
+.env
+.tmp/
+# 수집한 데이터(collector.db)는 백업 대상이지만, SQLite 저널 파일은 아니다.
+data/*.db-shm
+data/*.db-wal
+fixtures/**/*.png
+!fixtures/**/*.html
+fixtures/**/*.jpg
+fixtures/**/*.jpeg
+fixtures/**/*.webp
+!fixtures/**/.gitkeep

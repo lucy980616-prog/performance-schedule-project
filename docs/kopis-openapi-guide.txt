@@ -1,0 +1,1323 @@
+                                 OPEN API 
+
+*  kopis_openapi_code_v3.7  .
+
+1.   
+1. 1 
+
+            ()               
+            ()
+                           pblprfrService
+             
+                             
+URL/URI      
+                           [ O ]  Key
+            
+                           [ O ]                      [ ] SSL
+            
+                           [ O ] REST
+             
+                           [ O ] XML
+
+                           http://www.kopis.or.kr/openApi/restful/pblprfr
+
+                           5.0
+
+                           2099.12.31                     2026.04.23
+
+                           2026.04.23 : Version 5.0 
+                           2024.12.04 : Version 4.0 
+                           2016.07.01 : Version 3.0 
+                           2015.05.01 : Version 2.0 
+                           2014.01.01 : Version 1.0 
+
+1. 2     
+  
+
+  ()        pblpfrRequest                             
+                ()          
+    ()
+                                60  {}
+MsgBody     
+   service                      8  20230101
+   stdate   
+   eddate                       8  20230630( 31 )
+   cpage    
+   rows                         3  1
+   shprfnm
+                                3  10( 100 )
+
+                           100             (URLEncoding)
+shprfnmfct                       100  (URLEncoding)
+                                      AAAA
+shcate                           4    FC000003-01
+                                      11
+prfplccd                         4    1111
+                                      Y(  )
+signgucode          ()           2    01
+                                      Y
+signgucodesub ()                 4    20230101
+
+kidstate                         1
+
+prfstate                         4
+
+openrun                          2
+
+afterdate                        8
+
+                    /
+
+                     
+
+. URL  :
+http://www.kopis.or.kr/openApi/restful/pblprfr?service={}&stdate=20230601&eddate
+=20230630&cpage=1&rows=10&prfstate=02&signgucode=11&signgucodesub=1111&kidsta
+te=Y
+
+                             ()                               
+     ()
+                                      PF178134
+ dbs                 ID                
+     db                               2021.08.21
+         mt20id                       2024.09.29
+         prfnm                        
+         prfpdfrom  ()                http://www.kopis.or.kr/upload/pfmPoster/PF_P
+         prfpdto                      F178134_210809_125033.PNG
+         fcltynm                      
+                                      
+         poster                       Y
+                                      
+         area       
+         genrenm    
+         openrun
+         prfstate
+2.    
+2. 1 
+
+                ()                
+                               pblprfrService
+                ()               
+                               [ O ]  Key
+                               [ O ] 
+ URL/URI                       [ O ] REST
+                 
+
+                                                          [ ] SSL
+
+                 
+
+                               [ O ] XML
+                
+
+                               http://www.kopis.or.kr/openApi/restful/pblprfr/{}
+
+                               5.0
+                
+
+                               2099.12.31                 2026.04.23
+
+                               2026.04.23 : Version 5.0 
+                               2024.12.04 : Version 4.0 
+                               2016.07.01 : Version 3.0 
+                               2015.05.01 : Version 2.0 
+                               2014.01.01 : Version 1.0 
+
+2. 2      
+  
+
+  ()            pblpfrDetailRequest                       
+                                       
+    ()
+                ()
+MsgBody                                
+   service
+   mt20id                      60          {}
+                 ID             8          PF132236
+
+ URL : http://www.kopis.or.kr/openApi/restful/pblprfr/PF132236?service={}
+
+                      ()                             
+
+      ()                            PF132236
+ dbs             ID
+
+     db
+        mt20id
+prfnm                
+mt10id           ID  FC001431
+mt13id           ID  FC001431-01
+fcltynm         ()   ( ) ()
+frstregdt            2019-07-25 10:03:14
+prfpdfrom            2016.05.12
+prfpdto              2016.07.31
+prfcast              , , 
+prfcrew              
+prfruntime           1  30 
+prfage                12  
+entrpsnm              ()
+entrpsnmP             ()
+entrpsnmA       
+entrpsnmH             30,000 
+entrpsnmS            http://www.kopis.or.kr/upload/pfmPoster/PF_PF13223
+pcseguidance         6_160704_142630.gif
+
+poster               
+                     
+sty             
+area                 N
+genrenm              N
+openrun              N
+visit                Y
+child                N
+daehakro             N
+festival             N
+musicallicense   
+musicalcreate        2019-07-25 10:03:14
+updatedate           
+prfstate              ~ (20:00), (16:00,19:00),
+                     (15:00,18:00)
+dtguidance      
+                     http://www.kopis.or.kr/upload/ pfmIntroImage
+styurls              /PF_PF132236_160704_0226303.jpg
+
+   styurl        1
+styurl         2          http://www.kopis.or.kr/upload/ pfmIntroImage
+                          /PF_PF132236_160704_0226302.jpg
+styurl         3          http://www.kopis.or.kr/upload/ pfmIntroImage
+                          /PF_PF132236_160704_0226301.jpg
+   styurl      4          http://www.kopis.or.kr/upload/ pfmIntroImage
+                          /PF_PF132236_160704_0226300.jpg
+relates       
+   relatenm    1          
+                          http://www..com/univticket/tuniv/ccontent
+   relateurl   URL1       s/view.do?rbsIdx=27&contentsCode=20160925003
+                          
+   relatenm    2          http://www.ticketlink.co.kr/product/14015
+   relateurl   URL2       http://www.playticket.co.kr/ticketDetail.html?idx=266
+   relateurl   URL3
+
+3.    
+3. 1 
+
+              ()        
+              ()
+                     PrfplcService
+               
+                       
+ URL/URI       
+                     [ O ] 
+              
+                     [ O ]                      [ ] SSL
+              
+                     [ O ] REST
+               
+                     [ O ] XML
+
+                     http://www.kopis.or.kr/openApi/restful/prfplc
+
+                     5.0
+
+                     2099.12.31                 2026.04.23
+
+                     2026.04.23 : Version 5.0 
+                     2024.12.04 : Version 4.0 
+                     2016.07.01 : Version 3.0 
+                     2015.05.01 : Version 2.0 
+                     2014.01.01 : Version 1.0 
+3. 2      
+  
+
+() prfplcRequest
+
+()                   ()                                    
+                                
+MsgBody                                 {}
+   service                        60    1
+   cpage                            3   5 ( 100 )
+   rows                             3   (URLEncoding)
+   shprfnmfct                           1
+   fcltychartr       ()          100    11
+   signgucode        ()             4   1111
+   signgucodesub                    4
+                     /              4   20230101
+   afterdate          
+                                    8
+
+. URL :
+http://www.kopis.or.kr/openApi/restful/prfplc?service={}&cpage=1&rows=5&shprfnm
+fct=
+
+                           ()                              
+     ()
+                               FC000517
+ dbs                  ID       
+     db                        2
+        mt10id                 
+        fcltynm                
+        mt13cnt      ()        
+        fcltychartr  ()        2010
+        sidonm       
+        gugunnm
+        opende
+4.    
+4. 1 
+
+              ()       
+              ()
+                   pblprfrService
+               
+                     
+               
+                   [ O ]  Key
+
+                   [ O ]                           [ ] SSL
+
+                   [ O ] REST
+
+                   [ O ] XML
+
+ URL/URI           http://www.kopis.or.kr/openApi/restful/pblprfr/{
+                   }
+
+                   5.0
+              
+                   2099.12.31                                      2026.04.23
+
+                   2026.04.23 : Version 5.0 
+                   2024.12.04 : Version 4.0 
+                   2016.07.01 : Version 3.0 
+                   2015.05.01 : Version 2.0 
+                   2014.01.01 : Version 1.0 
+
+4. 2      
+  
+
+  ()          prfplcDetailRequest                  
+                                       
+    ()
+               ()
+MsgBody                                
+   service
+   mt10id          60 1                  {}
+               ID  20 1                  FC001247
+
+.URL :
+http://www.kopis.or.kr/openApi/restful/prfplc/FC001247?service={}
+
+                             ()                    
+          ()  
+
+ dbs
+     db
+mt10id                 ID               FC001247
+fcltynm                                 
+mt13cnt                                 9
+fcltychartr                             ()
+opende                                  1986
+seatscale                               32349
+telno                                   02-410-1114
+relateurl                               http://www.olympicpark.co.kr/
+                                          
+adres                                   424 
+                                        37.52112
+la                                      127.12836360000005
+lo                                      Y
+restaurant                              Y
+cafe                                    Y
+store                                   N
+nolibang                                N
+suyu                                    N
+parkbarrier           -                 N
+restbarrier           -                 N
+runwbarrier           -                 N
+elevbarrier           -                 Y
+parkinglot            
+mt13s                                   FC001247-01
+                       ID               KSPO DOME()
+   mt13id                               15,000
+   prfplcnm                             N
+   seatscale          _(Y/N/Z/0)        Y
+   stageorchat        _                 Y
+   stagepracat        _                 N
+   stagedresat        _                 20
+   stageoutdrat       _(N/000)          15.8X13.3X8.7
+   disabledseatscale  _(000/0X0/00.00)
+   stagearea
+5. /   
+5. 1 
+
+              ()            /   
+              ()
+                            MnfctService
+               
+                            /  
+ URL/URI       
+                            [ O ]  Key
+              
+                            [ O ]                      [ ] SSL
+              
+                            [ O ] REST
+               
+                            [O] XML
+
+                            http://www.kopis.or.kr/openApi/restful/mnfct
+
+                            5.0
+
+                            2099.12.31                 2026.04.23
+
+                            2026.04.23 : Version 5.0 
+                            2024.12.04 : Version 4.0 
+                            2016.07.01 : Version 3.0 
+                            2015.05.01 : Version 2.0 
+                            2014.01.01 : Version 1.0 
+
+5. 2 /     
+  
+
+  ()          mnfctRequest                                   
+    ()                       
+                 ()                       {}
+MsgBody                        60         1
+   service                       3        10( 100 )
+   cpage                         3        (URLEncoding)
+   rows                                   AAAA
+   entrpsnm                   100
+   shcate     /                  4        20230101
+              
+   afterdate                     8
+              /
+               
+.URL:
+http://www.kopis.or.kr/openApi/restful/mnfct?service={}&cpage=1&rows=10&entrpsn
+m=
+
+                   ()                  
+     ()
+                   /        AG002086
+ dbs               / ID     
+     db            /        
+        mt30id              031-829-0414
+        entrpsnm             2   
+        genrenm             http://www.rageum.org/
+        telno               AG002086
+        prfnm      ()
+        relateurl
+        sidonm
+
+6.    
+6. 1 
+
+                   ()    
+                   ()
+                       prfawadService
+                    
+                         
+ URL/URI            
+                       [ O ]  Key
+                   
+                       [ O ]                        [ ] SSL
+                   
+                       [ O ] REST
+                    
+                       [ O ] XML
+
+                       http://www.kopis.or.kr/openApi/restful/prfawad
+
+                       5.0
+
+                       2099.12.31                   2026.04.23
+
+                       2026.04.23 : Version 5.0 
+                       2024.12.04 : Version 4.0 
+                       2016.07.01 : Version 3.0 
+                       2015.05.01 : Version 2.0 
+                       2014.01.01 : Version 1.0 
+6. 2      
+  
+
+() prfawadRequest
+
+()                  ()                          
+                                  
+
+MsgBody                          60  {}
+   service          
+   stdate                        8  20190419
+   eddate           
+   cpage                         8  20190428 ( 31 )
+   rows             
+   shprfnm                       3  1
+   shprfnmfct       
+   shcate                        3  10 ( 100 )
+   prfplccd         ()
+   signgucode       ()           100  (URLEncoding)
+   signgucodesub    
+   kidstate                      100  (URLEncoding)
+   prfstate          
+                    /            4    AAAA
+   afterdate         
+                                 4    FC000001-01
+
+                                 2    11
+
+                                 4    1111
+
+                                 1    Y(  )
+
+                                 4    01
+
+                                 8    20230101
+
+.URL:
+http://www.kopis.or.kr/openApi/restful/prfawad?service={}&stdate=20230601&eddate
+=20230630&cpage=1&rows=10&prfstate=02&signgucode=11&signgucodesub=1111
+
+                             ()                          
+     ()
+                                 PF132236
+ dbs                 ID          
+     db                          2016.05.12
+         mt20id                  2016.07.31
+         prfnm      
+         prfpdfrom
+         prfpdto
+fcltynm     ()                   ( )
+poster                           http://www.kopis.or.kr/upload/pfmPoster/PF_P
+genrenm                          F132236_160704_142630.gif
+prfstate                         
+awards                           
+                                 2017    
+                                 
+
+7.    
+7. 1 
+
+            ()                
+            ()
+                            prffestService
+             
+                              
+ URL/URI     
+                            [ O ]  Key
+            
+                            [ O ]                      [ ] SSL
+            
+                            [ O ] REST
+             
+                            [ O ] XML
+
+                            http://www.kopis.or.kr/openApi/restful/prffest
+
+                            5.0
+
+                            2099.12.31                 2026.04.23
+
+                            2026.04.23 : Version 5.0 
+                            2024.12.04 : Version 4.0 
+                            2016.07.01 : Version 3.0 
+                            2015.05.01 : Version 2.0 
+                            2014.01.01 : Version 1.0 
+
+7. 2      
+  
+
+  ()        prffestRequest                             
+                 ()               
+   ()
+                                 60  {}
+MsgBody                           8  20160101
+   service                        8  20160630( 31 )
+   stdate
+   eddate
+cpage                            3  1
+rows                  
+shprfnm                          3  10( 100 )
+shprfnmfct          
+shcate                           100  (URLEncoding)
+prfplccd            
+signgucode          ()           100  (URLEncoding)
+signgucodesub       ()
+kidstate                         4    AAAA
+prfstate            
+                                 4    FC000001-01
+afterdate           /
+                                 2    11
+
+                                 4    1111
+
+                                 1    Y(  )
+
+                                 4    01
+
+                                 8    20230101
+
+.URL :
+http://www.kopis.or.kr/openApi/restful/prffest?service={}&stdate=20230601&eddate=
+20230630&cpage=1&rows=10
+
+                             ()                          
+     ()
+                                 PF132236
+ Dbs                 ID          
+     Db                          2016.05.12
+         mt20id                  2016.07.31
+         prfnm                   ( )
+         prfpdfrom  ()           http://www.kopis.or.kr/upload/pfmPoster/PF_P
+         prfpdto                 F132236_160704_142630.gif
+         fcltynm                 
+                                 Y
+         poster                  
+                     
+         genrenm     
+         festival
+         prfstate
+8. �   
+8. 1 
+
+               ()            �   
+               ()
+                             prferService
+                
+                             �  
+ URL/URI        
+                             [ O ]  Key
+               
+                             [ O ]                      [ ] SSL
+               
+                             [ O ] REST
+                
+                             [ O ] XML
+
+                             http://www.kopis.or.kr/openApi/restful/prfper
+
+                             5.0
+
+                             2099.12.31                 2026.04.23
+
+                             2026.04.23 : Version 5.0 
+                             2024.12.04 : Version 4.0 
+                             2016.07.01 : Version 3.0 
+                             2015.05.01 : Version 2.0 
+                             2014.01.01 : Version 1.0 
+
+8. 2 �     
+  
+
+  ()           prferRequest                             
+                                   
+   ()               ()
+                                  60  {}
+MsgBody        
+   service                        8  20160101
+   stdate      
+   eddate                         8  20160630( 31 )
+   cpage         
+   rows                           3  1
+   shprfnm     
+   shprfnmfct                     3  10( 100 )
+   shcate      
+   prfplccd    ()                 100      (URLEncoding)
+   signgucode
+                                  100      (URLEncoding)
+
+                                  4        AAAA
+
+                                  4        FC000001-01
+
+                                  2        11
+signgucodesub       ()           4  1111
+kidstate            
+prfstate                         1  Y(  )
+                     
+afterdate           /            4  01
+                     
+                                 8  20230101
+
+.URL:
+http://www.kopis.or.kr/openApi/restful/prfper?service={}&stdate=20230601&eddate=
+20230630&cpage=1&rows=10&prfstate=02
+
+                             ()                          
+     ()
+                                 PF132236
+ dbs                 ID          
+     db                          2016.05.12
+         mt20id                  2016.07.31
+         prfnm                   ( )
+         prfpdfrom  ()           http://www.kopis.or.kr/upload/pfmPoster/PF_P
+         prfpdto                 F132236_160704_142630.gif
+         fcltynm                 
+                                 
+         poster                  , 
+                                 ()
+         genrenm    
+         prfstate   
+         author
+         creator
+9.   
+9. 1 
+
+               ()                                           [ ] SSL
+               ()                boxofficeService
+                                  
+ URL/URI                         [ O ]  Key
+                                 [ O ] 
+                                 [ O ] REST
+                
+                                 [ O ] XML
+               
+                                 http://www.kopis.or.kr/openApi/restful/boxoffice
+               
+                                 5.0
+
+                                 2099.12.31                          2026.04.23
+
+                                 2026.04.23 : Version 5.0 
+
+                                 2024.12.04 : Version 4.0 
+
+                                 2016.07.01 : Version 3.0 
+
+                                 2015.05.01 : Version 2.0 
+
+                                 2014.01.01 : Version 1.0 
+
+9. 2     
+  
+
+  ()           boxofficeRequest                             
+                  ()              
+   ()
+                                      60  {}
+MsgBody                                8  20230108
+   service
+   stdate
+
+eddate                                8  20230112( 31 )
+date           
+catecode                              8  20171219
+area           
+srchseatscale                         9      AAAA
+
+                                      5      11
+
+                                      10     0(), 100(1~300 ),
+
+                                             300(300~500 ),
+
+                                             500(500~1000 ),
+
+                                             1000(1000~5000 ),
+                                                                                 5000(5000~10000 ),
+                                                                                 10000(10000 )
+
+.URL:
+http://kopis.or.kr/openApi/restful/boxoffice?service={}&stdate=20230601&eddate=20
+230601&catecode=AAAA&area=11&srchseatscale=100
+
+                         ()                           
+      ()
+                             2017-12-12~2017-12-18
+ boxofs           // 
+     basedate                
+     boxof                   1
+        cate                  []
+        rnum                 2016.06.07~2016.07.24
+        prfnm                
+        prfpd                212
+        prfplcnm             4
+        seatcnt              
+        prfdtcnt             http://www.kopis.or.kr/upload/pfmPoster/PF_PF
+        area                 131793_160603_140415.jpg
+                             PF131793
+        poster     ID
+
+        mt20id
+10.    
+10. 1 
+
+            ()                                          [ ] SSL
+            ()               boxStatsService
+                               
+ URL/URI                     [ O ]  Key
+                             [ O ] 
+                             [ O ] REST
+             
+                             [ O ] XML
+            
+                             http://www.kopis.or.kr/openApi/restful/boxStats
+            
+                             5.0
+
+                             2099.12.31                          2026.04.23
+
+                             2026.04.23 : Version 5.0 
+
+                             2024.12.04 : Version 4.0 
+
+                             2016.07.01 : Version 3.0 
+
+                             2015.05.01 : Version 2.0 
+
+                             2014.01.01 : Version 1.0 
+
+10. 2      
+  
+
+  ()        boxStatsRequest                                 
+   ()          ()             
+                                         {}
+MsgBody                         60       day()
+   service                               dayWeek()
+                                          / 
+ststype                           5       31 ,  
+                                           
+stdate                            8      20230108
+eddate                            8      20230112( 31 )
+.URL:
+http://kopis.or.kr/openApi/restful/boxStats?service={}&stdate=20230108&eddate=20
+230112&ststype=day
+
+                      ()               
+       ()
+                      //   2023-01-08
+ box-statsofs              1058
+     boxStatsof            4600
+        prfdt              53253
+        prfcnt             20682
+        prfdtcnt           32571
+        ntssnmrssm         1973067860
+        cancelnmrssm   
+        totnmrssm
+        ntssamountsm
+
+11.    
+11. 1 
+
+                      ()                              [ ] SSL
+                      ()   boxStatsCateService
+                             
+ URL/URI                   [ O ]  Key
+                           [ O ] 
+                           [ O ] REST
+                       
+                           [ O ] XML
+                      
+                           http://www.kopis.or.kr/openApi/restful/boxStatsCate
+                      
+                           5.0
+
+                           2099.12.31                          2026.04.23
+
+                           2026.04.23 : Version 5.0 
+
+                           2024.12.04 : Version 4.0 
+
+                           2016.07.01 : Version 3.0 
+
+                           2015.05.01 : Version 2.0 
+
+                           2014.01.01 : Version 1.0 
+11. 2      
+  
+
+  ()                  boxStatsRequest                                 
+                         ()             
+   ()                                              {}
+                                          60       20230108
+MsgBody                                     8      20230112( 31 )
+   service                                  8      AAAA|BBBB|CCCA
+   stdate               
+   eddate                                 30
+   catecode
+
+.URL:
+http://kopis.or.kr/openApi/restful/boxStatsCate?service={}&stdate=20230108&eddate
+=20230112&catecode=AAAA
+
+                        ()                         
+       ()
+                                       
+ box-statsofs                          190
+     boxStatsof                        26730
+        catenm                         76368
+        prfcnt                         19093
+        prfdtcnt                       57275
+        ntssnmrssm                     1498396090
+        cancelnmrssm   
+        totnmrssm
+        ntssamountsm
+12.    
+12. 1 
+
+            ()                                          [ ] SSL
+            ()               boxStatsTimeService
+                               
+ URL/URI                     [ O ]  Key
+                             [ O ] 
+                             [ O ] REST
+             
+                             [ O ] XML
+            
+                             http://www.kopis.or.kr/openApi/restful/boxStatsTime
+            
+                             5.0
+
+                             2099.12.31                          2026.04.23
+
+                             2026.04.23 : Version 5.0 
+
+                             2024.12.04 : Version 4.0 
+
+                             2016.07.01 : Version 3.0 
+
+                             2015.05.01 : Version 2.0 
+
+                             2014.01.01 : Version 1.0 
+
+12. 2      
+  
+
+  ()        boxStatsRequest                                 
+               ()             
+   ()                                    {}
+                                60       20230108
+MsgBody                           8      20230112( 31 )
+   service                        8 
+   stdate
+   eddate
+
+.URL:
+http://kopis.or.kr/openApi/restful/boxStatsTime?service={}&stdate=20230108&eddate
+=20230112
+                        ()                
+       ()
+                            00:00 ~ 2:59
+ box-statsofs               16
+     boxStatsof             16
+        timename            82
+        prfcnt              23
+        prfdtcnt            59
+        ntssnmrssm          -989500
+        cancelnmrssm   
+        totnmrssm
+        ntssamountsm
+
+13.    
+13. 1 
+
+                      ()                               [ ] SSL
+                      ()    boxStatsPriceService
+                              
+ URL/URI                    [ O ]  Key
+                            [ O ] 
+                            [ O ] REST
+                       
+                            [ O ] XML
+                      
+                            http://www.kopis.or.kr/openApi/restful/boxStatsPrice
+                      
+                            5.0
+
+                            2099.12.31                          2026.04.23
+
+                            2026.04.23 : Version 5.0 
+
+                            2024.12.04 : Version 4.0 
+
+                            2016.07.01 : Version 3.0 
+
+                            2015.05.01 : Version 2.0 
+
+                            2014.01.01 : Version 1.0 
+13. 2      
+  
+
+  ()                  boxStatsRequest                               
+                         ()             
+   ()                                            {}
+                                          60     20230108
+MsgBody                                     8    20230112( 31 )
+   service                                  8 
+   stdate
+   eddate
+
+.URL:
+http://kopis.or.kr/openApi/restful/boxStatsPrice?service={ServiceKey}&stdate=20230108&edda
+te=20230112
+
+                        ()                       
+       ()
+                                       
+ box-statsofs                          0
+     boxStatsof                        16861
+        catenm                         7366
+        price                          9495
+        ntssnmrssm     
+        cancelnmrssm                   17
+        totnmrssm      
+        pertotnmrssm                   75848000
+
+        ntssamountsm
+14.      
+14. 1 
+
+            ()                      
+            ()
+                                prfstsTotalService
+             
+                                   
+ URL/URI                           ->, ,    
+              
+                                [ O ]  Key
+              
+                                [ O ]                      [ ] SSL
+
+                                [ O ] REST
+
+                                [ O ] XML
+
+                                http://www.kopis.or.kr/openApi/restful/prfstsTotal
+
+                                5.0
+
+                                2099.12.31                 2026.04.23
+
+                                2026.04.23 : Version 5.0 
+                                2024.12.04 : Version 4.0 
+                                2016.07.01 : Version 3.0 
+                                2015.05.01 : Version 2.0 
+                                2014.01.01 : Version 1.0 
+
+14. 2       
+  
+
+  ()        prfstsTotalRequest                                       
+   ()           ()               
+                                                    {}
+MsgBody                             60              day(: 31 )
+   service                                          dayWeek(: 7 )
+                                                    20160101
+ststype                              7              20160630( 31 )
+
+stdate                               8 
+eddate                               8 
+
+.URL:
+http://www.kopis.or.kr/openApi/restful/prfstsTotal?service={}&ststype=dayWeek&stda
+te=20160601&eddate=20160630
+                ()                     
+     ()       
+
+ prfSts
+     prfSt
+
+prfdt               20160101 ()
+                     ()
+prfprocnt           14
+prfdtcnt            61
+amount              39526200
+nmrs                34576
+prfcnt              53
+ntssnmrs            7323
+cancelnmrs          1390
+
+15     
+15. 1 
+
+            ()          
+            ()
+                    prfstsAreaService
+             
+                       
+ URL/URI     
+                    [ O ]  Key
+            
+                    [ O ]                      [ ] SSL
+            
+                    [ O ] REST
+             
+                    [ O ] XML
+
+                    http://www.kopis.or.kr/openApi/restful/prfstsArea
+
+                    5.0
+
+                    2099.12.31                 2026.04.23
+
+                    2026.04.23 : Version 5.0 
+                    2024.12.04 : Version 4.0 
+                    2016.07.01 : Version 3.0 
+                    2015.05.01 : Version 2.0 
+                    2014.01.01 : Version 1.0 
+15. 2       
+  
+
+  ()               prfstsAreaRequest            
+                           ()          
+   ()
+                                      60  {}
+MsgBody                                8  20160101
+   service                             8  20160107( 31 )
+   stdate
+   eddate
+
+http://www.kopis.or.kr/openApi/restful/prfstsArea?service={}&stdate=20160601&edda
+te=20160602
+
+                           ()                   
+     ()
+                                      
+ Prfsts                               1085
+     prfst                            1353
+        area                          551638
+        fcltycnt                      68
+        prfplccnt                     19
+        seatcnt                       103
+        prfcnt                        17058
+        prfprcnt                      1996
+        prfdtcnt                      15062
+        nmrs                          85917000
+        nmrcancl    
+        totnmrs
+        amount
+16.     
+16. 1 
+
+            ()                                            [ ] SSL
+            ()                 prfstsCateService
+                                  
+ URL/URI                       [ O ] 
+                               [ O ] 
+                               [ O ] REST
+             
+                               [ O ] XML
+            
+                               http://www.kopis.or.kr/openApi/restful/prfstsCate
+            
+                               5.0
+
+                               2099.12.31                 2026.04.23
+
+                               2026.04.23 : Version 5.0 
+
+                               2024.12.04 : Version 4.0 
+
+                               2016.07.01 : Version 3.0 
+
+                               2015.05.01 : Version 2.0 
+
+                               2014.01.01 : Version 1.0 
+
+16. 2       
+  
+
+  ()        prfstsCateRequest
+
+   ()       ()                                                
+                                
+MsgBody                                    {}
+   service                          60     20160101
+   stdate                            8     20160102( 31 )
+   eddate                            8 
+
+.URL:
+http://www.kopis.or.kr/openApi/restful/prfstsCate?service={}&stdate=20160601&edda
+te=20160602
+                            ()                
+     ()
+                                
+ Prfsts                         6
+     prfst                      64
+        cate                    10364600
+        prfprocnt               9.9
+        prfdtcnt                1080
+        amount                  6.8
+        amountshr  
+        nmrs
+        nmrsshr
+
+17.     
+17. 1 
+
+         ()                                   [ ] SSL
+         ()        prfstsPrfByService
+                      
+                   [ O ] 
+                   [ O ] 
+                   [ O ] REST
+URL/URI            [ O ] XML
+
+                   http://www.kopis.or.kr/openApi/restful/prfstsPrfBy
+
+                   5.0
+         
+                   2099.12.31                          2026.04.23
+          
+                   2026.04.23 : Version 5.0 
+                   2024.12.04 : Version 4.0 
+                   2016.07.01 : Version 3.0 
+                   2015.05.01 : Version 2.0 
+                   2014.01.01 : Version 1.0 
+17. 2       
+  
+
+  ()              prfstsPrfByRequest                             
+                      ()               
+   ()                                          {}
+                                         60    1
+MsgBody                                    3   10 ( 100 )
+   service                                 3   20160601
+   cpage                                   8   20160630 ( 31 )
+   rows                                    8   AAAA
+   stdate                                  4   (URLEncoding)
+   eddate         
+   shcate                               100
+   shprfnm
+
+URL:
+http://www.kopis.or.kr/openApi/restful/prfstsPrfBy?service={}&cpage=1&rows=10&st
+date=20160601&eddate=20160630&shcate=AAAA&shprfnm=
+.
+  
+
+   ()                       ()                                
+prfsts
+                                      
+   prfst                              
+       prfnm                          PF131558
+       cate        ID                 
+       mt20id                         ()
+       fcltynm    /                   2016.06.07
+       entrpsnm                       2016.07.24
+       prfpdfrom                      31
+       prfpdto    
+       prfdtcnt
+18.     
+18. 1 
+
+               ()      
+               ()
+                   prfstsPrfByFctService
+                
+                      
+ URL/URI        
+                   [ O ]  Key
+               
+                   [ O ]                       [ ] SSL
+               
+                   [ O ] REST
+                
+                   [ O ] XML
+
+                   http://www.kopis.or.kr/openApi/restful/prfstsPrfByFct
+
+                   5.0
+
+                   2099.12.31                  2026.04.23
+
+                   2026.04.23 : Version 5.0 
+                   2024.12.04 : Version 4.0 
+                   2016.07.01 : Version 3.0 
+                   2015.05.01 : Version 2.0 
+                   2014.01.01 : Version 1.0 
+
+18. 2       
+  
+
+  ()           prfstsPrfByFctRequest
+
+   ()          ()                                            
+                                       
+MsgBody                                      {}
+   service                             60    20160601
+   stdate                                8   20160630 ( 31 )
+   eddate                                8   11
+   sharea      ()                        2   (URLEncoding)
+   shprfnmfct  
+                                      100
+
+.URL:
+http://www.kopis.or.kr/openApi/restful/prfstsPrfByFct?service={}&cpage=1&rows=10
+&stdate=20160601&eddate=20160602&sharea=11&shprfnmfct=
+                             ()                          
+     ()
+                                 
+ prfsts                          CJ 
+     prfst                       1004
+        prfnmfct                 1
+        prfnmplc                 1
+        seatcnt                  1
+        prfcnt                   480
+        prfprocnt   
+        prfdtcnt
+        totnmrs
+
+19.     
+19.1 
+
+                   ()      
+
+                   ()  prfstsPriceService
+
+                          
+
+                       [ O ]  Key
+                   
+ 
+
+                       [ O ]                      [ ] SSL
+
+                       [ O ] REST
+                     
+  
+
+                       [ O ] XML
+
+ URL/URI               http://www.kopis.or.kr/openApi/restful/prfstsPrice
+
+                       5.0
+
+                       2099.12.31                 2026.04.23
+
+                       2026.04.23 : Version 5.0 
+                       2024.12.04 : Version 4.0 
+                       2016.07.01 : Version 3.0 
+                       2015.05.01 : Version 2.0 
+                       2014.01.01 : Version 1.0 
+19.2     
+  
+
+   () prfawadRequest
+
+()               ()               
+                                
+
+MsgBody                        60  {}
+   service                      8  20190625
+   stdate                       8  20190626 ( 31 )
+   eddate                       4  AAAA
+   shcate
+
+.URL:
+http://www.kopis.or.kr/openApi/restful/prfstsPrice?service={}&stdate=20190625&edd
+ate=20190626&shcate=AAAA
+
+  
+
+   ()                      ()                          
+prfsts
+                               3
+   prfst                       2365000
+       nmrs                    0
+       amount                  
+       nmrcancl                15 
+       cate                    0.1
+                               3
+price            
+amountsmra        
+tio               
+totnmrs
+

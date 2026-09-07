@@ -1,0 +1,20 @@
+{
+  "name": "performance-schedule-backend",
+  "private": true,
+  "type": "module",
+  "description": "집 PC 수집기 — KOPIS / 예매처 캐스팅 / X 이벤트 3개 모듈",
+  "scripts": {
+    "collect": "node --env-file-if-exists=.env src/cli.ts",
+    "test": "node --env-file-if-exists=.env --test \"tests/**/*.test.ts\"",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "fast-xml-parser": "^5.11.1",
+    "playwright": "^1.62.1",
+    "zod": "^4.5.4"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "typescript": "^5.9.0"
+  }
+}

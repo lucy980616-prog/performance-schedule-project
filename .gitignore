@@ -1,0 +1,7 @@
+# 세션 도구가 남긴 산출물 — 소스가 아니다
+.claude/
+.playwright-mcp/
+
+# OS/에디터
+.DS_Store
+Thumbs.db
