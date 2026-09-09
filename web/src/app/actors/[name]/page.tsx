@@ -3,10 +3,10 @@ import { ActorClient } from "./actor-client";
 
 export async function generateStaticParams() {
   const names = await fetchAllActorNames();
-  return names.map((name) => ({ name: encodeURIComponent(name) }));
+  return names.map((name) => ({ name }));
 }
 
 export default async function ActorPage({ params }: { params: Promise<{ name: string }> }) {
-  const { name: encoded } = await params;
-  return <ActorClient name={decodeURIComponent(encoded)} />;
+  const { name } = await params;
+  return <ActorClient name={name} />;
 }
