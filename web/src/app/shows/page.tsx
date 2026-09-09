@@ -1,65 +1,85 @@
+"use client";
+
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
-import { listShowRows } from "@/lib/queries";
-import { SyncButton } from "@/components/sync-button";
+import { fetchAllShows, type ShowRow } from "@/lib/data";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const dynamic = "force-dynamic";
+const STATE_ORDER = ["공연중", "공연예정", "공연완료"] as const;
+const GENRES = [
+  { value: "play", label: "연극" },
+  { value: "musical", label: "뮤지컬" },
+] as const;
 
-const STATE_ORDER = ["공연중", "공연예정", "공연완료"];
+export default function ShowsPage() {
+  const [shows, setShows] = useState<ShowRow[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [state, setState] = useState<string | null>(null);
+  const [genre, setGenre] = useState<string | null>(null);
 
-export default async function ShowsPage({ searchParams }: PageProps<"/shows">) {
-  const sp = await searchParams;
-  const state = Array.isArray(sp.state) ? sp.state[0] : sp.state;
-  const genre = Array.isArray(sp.genre) ? sp.genre[0] : sp.genre;
+  useEffect(() => {
+    fetchAllShows()
+      .then(setShows)
+      .finally(() => setLoading(false));
+  }, []);
 
-  const shows = listShowRows({ state, genre });
+  const filtered = useMemo(
+    () =>
+      shows.filter((s) => (state ? s.state === state : true) && (genre ? s.genre === genre : true)),
+    [shows, state, genre],
+  );
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between gap-2">
-        <h1 className="text-xl font-bold">전체 공연</h1>
-        <SyncButton />
-      </div>
+      <h1 className="text-xl font-bold">전체 공연</h1>
 
       <div className="flex flex-wrap gap-1.5">
-        <FilterChip label="전체" href="/shows" active={!state && !genre} />
+        <FilterChip
+          label="전체"
+          active={!state && !genre}
+          onClick={() => {
+            setState(null);
+            setGenre(null);
+          }}
+        />
         {STATE_ORDER.map((s) => (
           <FilterChip
             key={s}
             label={s}
-            href={`/shows?state=${encodeURIComponent(s)}`}
             active={state === s}
+            onClick={() => setState(state === s ? null : s)}
           />
         ))}
-        {["연극", "뮤지컬"].map((g) => (
+        {GENRES.map((g) => (
           <FilterChip
-            key={g}
-            label={g}
-            href={`/shows?genre=${encodeURIComponent(g)}`}
-            active={genre === g}
+            key={g.value}
+            label={g.label}
+            active={genre === g.value}
+            onClick={() => setGenre(genre === g.value ? null : g.value)}
           />
         ))}
       </div>
 
-      {shows.length === 0 ? (
+      {loading ? (
+        <p className="text-muted-foreground py-10 text-center text-sm">불러오는 중…</p>
+      ) : filtered.length === 0 ? (
         <Card>
           <CardContent className="text-muted-foreground space-y-1 py-10 text-center text-sm">
-            <p>아직 불러온 공연이 없습니다.</p>
-            <p>&ldquo;KOPIS 동기화&rdquo;를 눌러 공연 목록을 가져오세요.</p>
+            <p>해당하는 공연이 없습니다.</p>
           </CardContent>
         </Card>
       ) : (
         <>
-          <p className="text-muted-foreground text-xs">{shows.length}개의 공연</p>
+          <p className="text-muted-foreground text-xs">{filtered.length}개의 공연</p>
           <ul className="space-y-2">
-            {shows.map((s) => (
+            {filtered.map((s) => (
               <li key={s.id}>
                 <Link href={`/shows/${s.id}`}>
                   <Card className="hover:bg-accent/50 transition-colors">
                     <CardContent className="flex gap-3 py-3">
                       {s.poster ? (
-                        // KOPIS 포스터는 외부 호스트라 next/image 설정 없이 img로 둔다.
+                        // 예매처 포스터는 외부 호스트라 next/image 설정 없이 img로 둔다.
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
                           src={s.poster}
@@ -72,20 +92,20 @@ export default async function ShowsPage({ searchParams }: PageProps<"/shows">) {
                       <div className="min-w-0 flex-1 space-y-1">
                         <div className="flex items-start gap-2">
                           <p className="min-w-0 flex-1 font-medium">{s.name}</p>
-                          {s.tracked === 1 && (
+                          {s.tracked && (
                             <Badge variant="default" className="shrink-0 text-[10px]">
                               추적중
                             </Badge>
                           )}
                         </div>
-                        <p className="text-muted-foreground truncate text-xs">{s.facility}</p>
+                        <p className="text-muted-foreground truncate text-xs">{s.venue}</p>
                         <p className="text-muted-foreground text-xs tabular-nums">
-                          {s.start_date} ~ {s.end_date}
+                          {s.start_date ?? "?"} ~ {s.end_date ?? "?"}
                         </p>
                         <div className="flex gap-1 pt-0.5">
                           {s.genre && (
                             <Badge variant="outline" className="text-[10px]">
-                              {s.genre}
+                              {s.genre === "musical" ? "뮤지컬" : s.genre === "play" ? "연극" : s.genre}
                             </Badge>
                           )}
                           {s.state && (
@@ -110,12 +130,20 @@ export default async function ShowsPage({ searchParams }: PageProps<"/shows">) {
   );
 }
 
-function FilterChip({ label, href, active }: { label: string; href: string; active: boolean }) {
+function FilterChip({
+  label,
+  active,
+  onClick,
+}: {
+  label: string;
+  active: boolean;
+  onClick: () => void;
+}) {
   return (
-    <Link href={href}>
+    <button onClick={onClick}>
       <Badge variant={active ? "default" : "outline"} className="cursor-pointer">
         {label}
       </Badge>
-    </Link>
+    </button>
   );
 }

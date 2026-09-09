@@ -1,25 +1,45 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { listByDate, listFavoriteActors } from "@/lib/queries";
-import { todayISO } from "@/lib/schedule";
+import { fetchByDate, fetchFavoriteActors, type TodayEntry } from "@/lib/data";
+import { todayISO } from "@/lib/utils";
 import { DateNav } from "@/components/date-nav";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const dynamic = "force-dynamic";
+export default function TodayPage() {
+  const [date, setDate] = useState(todayISO());
+  const [entries, setEntries] = useState<TodayEntry[]>([]);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const [loading, setLoading] = useState(true);
 
-export default async function TodayPage({ searchParams }: PageProps<"/">) {
-  const sp = await searchParams;
-  const raw = Array.isArray(sp.date) ? sp.date[0] : sp.date;
-  const date = raw && /^\d{4}-\d{2}-\d{2}$/.test(raw) ? raw : todayISO();
+  useEffect(() => {
+    let cancelled = false;
+    Promise.all([fetchByDate(date), fetchFavoriteActors()])
+      .then(([e, f]) => {
+        if (cancelled) return;
+        setEntries(e);
+        setFavorites(new Set(f));
+      })
+      .finally(() => !cancelled && setLoading(false));
+    return () => {
+      cancelled = true;
+    };
+  }, [date]);
 
-  const entries = listByDate(date);
-  const favorites = new Set(listFavoriteActors());
+  function handleDateChange(next: string) {
+    setLoading(true);
+    setDate(next);
+  }
 
   return (
     <div className="space-y-4">
-      <DateNav date={date} />
+      <DateNav date={date} onChange={handleDateChange} />
 
-      {entries.length === 0 ? (
+      {loading ? (
+        <p className="text-muted-foreground py-10 text-center text-sm">불러오는 중…</p>
+      ) : entries.length === 0 ? (
         <Card>
           <CardContent className="text-muted-foreground space-y-2 py-10 text-center text-sm">
             <p>이 날짜에 등록된 회차가 없습니다.</p>
@@ -27,7 +47,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/">) {
               <Link href="/shows" className="text-foreground underline">
                 전체 공연
               </Link>
-              에서 공연을 불러오고 캐스팅을 등록해 보세요.
+              에서 다른 날짜를 확인해 보세요.
             </p>
           </CardContent>
         </Card>
@@ -45,7 +65,7 @@ export default async function TodayPage({ searchParams }: PageProps<"/">) {
                       >
                         {e.showName}
                       </Link>
-                      <p className="text-muted-foreground truncate text-xs">{e.facility}</p>
+                      <p className="text-muted-foreground truncate text-xs">{e.venue}</p>
                     </div>
                     <Badge variant="secondary" className="shrink-0 tabular-nums">
                       {e.time}

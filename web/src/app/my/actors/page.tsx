@@ -1,17 +1,31 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { listFavoriteActors, listFavoriteActorShowtimes } from "@/lib/queries";
-import { todayISO } from "@/lib/schedule";
+import {
+  fetchFavoriteActorShowtimes,
+  fetchFavoriteActors,
+  type FavoriteActorShowtime,
+} from "@/lib/data";
+import { todayISO } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 
-export const dynamic = "force-dynamic";
+export default function FavoriteActorsPage() {
+  const [actors, setActors] = useState<string[]>([]);
+  const [showtimes, setShowtimes] = useState<FavoriteActorShowtime[]>([]);
+  const [loading, setLoading] = useState(true);
 
-export default async function FavoriteActorsPage() {
-  const actors = listFavoriteActors();
-  const showtimes = listFavoriteActorShowtimes(todayISO());
+  useEffect(() => {
+    fetchFavoriteActors()
+      .then(async (names) => {
+        setActors(names);
+        setShowtimes(await fetchFavoriteActorShowtimes(todayISO()));
+      })
+      .finally(() => setLoading(false));
+  }, []);
 
-  // 날짜별로 묶어서 달력처럼 훑어보게 한다
-  const byDate = showtimes.reduce<Map<string, typeof showtimes>>((map, s) => {
+  const byDate = showtimes.reduce<Map<string, FavoriteActorShowtime[]>>((map, s) => {
     const list = map.get(s.date) ?? [];
     list.push(s);
     map.set(s.date, list);
@@ -22,7 +36,9 @@ export default async function FavoriteActorsPage() {
     <div className="space-y-4">
       <h1 className="text-xl font-bold">애배 달력</h1>
 
-      {actors.length === 0 ? (
+      {loading ? (
+        <p className="text-muted-foreground py-10 text-center text-sm">불러오는 중…</p>
+      ) : actors.length === 0 ? (
         <Card>
           <CardContent className="text-muted-foreground space-y-1 py-10 text-center text-sm">
             <p>등록한 애배가 없습니다.</p>

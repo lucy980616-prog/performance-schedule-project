@@ -1,28 +1,21 @@
 "use client";
 
-import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { Star } from "lucide-react";
+import { addFavoriteActor, removeFavoriteActor } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 
 export function FavoriteToggle({ name, initial }: { name: string; initial: boolean }) {
-  const router = useRouter();
   const [on, setOn] = useState(initial);
   const [busy, setBusy] = useState(false);
-  const [, startTransition] = useTransition();
 
   async function toggle() {
     setBusy(true);
     const next = !on;
     try {
-      const res = await fetch("/api/favorites", {
-        method: next ? "POST" : "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name }),
-      });
-      if (!res.ok) throw new Error();
+      if (next) await addFavoriteActor(name);
+      else await removeFavoriteActor(name);
       setOn(next);
-      startTransition(() => router.refresh());
     } catch {
       // 실패하면 상태를 되돌린다
     } finally {
