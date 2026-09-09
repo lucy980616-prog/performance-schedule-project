@@ -8,5 +8,6 @@ export async function generateStaticParams() {
 
 export default async function ActorPage({ params }: { params: Promise<{ name: string }> }) {
   const { name } = await params;
-  return <ActorClient name={name} />;
+  // 정적 export에서는 서버가 없어 URL 경로 세그먼트가 디코딩되지 않은 채로 온다.
+  return <ActorClient name={decodeURIComponent(name)} />;
 }
