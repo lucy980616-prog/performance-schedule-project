@@ -609,26 +609,25 @@ Windows **작업 스케줄러**에 3개 등록.
 - [x] `backend/` 패키지 생성, 모듈 3개 골격 + 테스트 하네스
 - [x] `shared/claude.ts` — `runClaudeJson()` (`claude -p` 래퍼, zod 사후 검증 + 1회 재시도)
 - [x] ~~Anthropic API 키 발급~~ → 불필요. `claude -p`로 대체 (→ §2 ④)
-- [ ] **KOPIS 인증키 발급** (PC에서만, 메일로 수령) — 지금 가장 앞을 막고 있는 항목
-- [ ] Supabase 프로젝트 생성 → 위 SQL로 스키마 생성 → RLS 설정
-- [ ] Supabase Auth로 본인 계정 1개 생성
+- [x] ~~KOPIS 인증키 발급~~ → **KOPIS 자체를 포기하고 우회**했다 (§10)
+- [x] **Supabase 프로젝트 생성 → 위 SQL로 스키마 생성 → RLS 설정** (2026-09-09, §11)
+- [ ] Supabase Auth로 본인 계정 1개 생성 — 아직. 지금은 인증 없는 개인용 프로토타입 (§11)
 
-### 1.5단계 — 모듈별 실측 (키 발급 직후)
-- [ ] `kopis`: `KOPIS_API_KEY=... npm test` → 응답 필드명이 PDF와 맞는지 대조 **(1순위)**
-- [ ] `ticket-casting`: 캐스팅표 캡처를 `fixtures/`에 넣고 `RUN_LIVE=1 npm test` → 판독 정확도 확인
-- [ ] `ticket-casting`: `HEADFUL=1`로 예매처 상세페이지를 띄워 `SITES` 셀렉터 확정
-- [ ] `x-events`: `HEADFUL=1`로 X 프로필을 띄워 `TEXT_SELECTORS` 확정
+### 1.5단계 — 모듈별 실측 (KOPIS 대상은 전부 무효화됨, §10 참고)
+- [x] ~~`kopis`: 응답 필드명 대조~~ → KOPIS 포기로 불필요
+- [x] `ticket-casting`: NOL/예스24/티켓링크 실측 완료 (backend/README.md §2)
+- [x] `x-events`: 신디케이션 엔드포인트로 전환, 실측 완료 (§2 ③)
 
 ### 2단계 — 데이터 계층 이식
-- [ ] `queries.ts` → `supabase-js` 기반으로 재작성
-- [ ] KOPIS 동기화를 수집기 스크립트로 이동
-- [ ] **KOPIS 실호출 검증** (아직 미검증 — 응답 필드명이 개발가이드 PDF 기준이라 실제와 대조 필요)
+- [x] **`queries.ts` → `supabase-js` 기반으로 재작성** (2026-09-09, `web/src/lib/data.ts`, §11)
+- [ ] ~~KOPIS 동기화를 수집기 스크립트로 이동~~ → KOPIS 포기로 불필요
+- [ ] ~~KOPIS 실호출 검증~~ → KOPIS 포기로 불필요
 
 ### 3단계 — 앱 정적화 + 배포
-- [ ] `next.config.ts`에 `output: 'export'`
-- [ ] 페이지를 클라이언트 컴포넌트 + Supabase 조회로 전환
-- [ ] GitHub Actions로 Pages 자동 배포
-- [ ] 폰에서 접속 확인
+- [x] **`next.config.ts`에 `output: 'export'`** (2026-09-09, §11)
+- [x] **페이지를 클라이언트 컴포넌트 + Supabase 조회로 전환** (2026-09-09, §11)
+- [x] **GitHub Actions로 Pages 자동 배포** (2026-09-09, §11) — https://lucy980616-prog.github.io/performance-schedule-project/
+- [ ] 폰에서 접속 확인 — 데스크톱 브라우저(Playwright)로는 확인함, 실제 휴대폰 테스트는 아직
 
 ### 4단계 — 수집기 완성
 - [x] `backend/` 의존성 설치 (playwright, zod, fast-xml-parser)
@@ -715,3 +714,74 @@ React Query의 dehydrated state를 심어 두는데, 그 안에 위젯 데이터
 동작하는 게 맞고(사이트에 부담을 주지 않는 설계), 검증은 표본으로 충분히 확인했다.
 5. **`claude -p` 구조화 출력 신뢰성** — SDK와 달리 스키마 준수가 보장되지 않는다. 실제 캐스팅표 캡처
    여러 장으로 파싱 실패율을 재보고, 허용 못 할 수준이면 API 전환을 앞당긴다
+
+---
+
+## 11. Supabase 이관 + web 정적화 + GitHub Pages 배포 (2026-09-09)
+
+KOPIS 포기(§10) 이후 `web/`은 여전히 옛 설계(로컬 SQLite + 서버 렌더링) 그대로였고, `backend/`가
+모은 데이터를 볼 방법이 없었다. 이 갭을 메우고 **1차 프로토타입을 실제로 열어볼 수 있는 URL**까지
+만들었다.
+
+### Supabase 세팅 + 데이터 이관
+
+- MCP(`plugin:supabase`)로 프로젝트를 잡고 §3 스키마를 `backend/`의 실제 SQLite 구조(발견 기반
+  `shows.source/source_id`, KOPIS 필드 없음)에 맞춰 다시 짰다 — `favorite_actors`/`my_schedule`도 추가.
+- 전 테이블에 RLS를 걸었다. 공연/회차/캐스팅/이벤트는 익명 읽기 전용. **`favorite_actors`/`my_schedule`은
+  아직 로그인 기능이 없어서 프로토타입 단계로 익명 쓰기까지 열어뒀다** — 여러 명이 같은 사이트를 보면
+  서로의 애배·일정이 섞인다. Supabase Auth를 붙이기 전까지는 "URL을 아는 사람만" 개인용으로 쓰는 걸
+  전제로 한다.
+- `backend/data/collector.db`(SQLite)의 실측 데이터를 그대로 옮겼다 — 테스트용 시드(`_test_*`)는
+  제외: 공연 140건, 회차 218개, 캐스팅 937건, 배역 53개, SNS 계정 2개, 이벤트 82건.
+
+### web — 정적 export + Supabase 직접 조회로 전면 재작성
+
+옛 `web/`은 Next 서버 컴포넌트가 `node:sqlite`를 직접 읽고, `/api/*` 라우트가 KOPIS 동기화와
+`claude -p` 추출을 수행하는 구조였다. GitHub Pages는 서버가 없으므로 전부 걷어냈다.
+
+- `src/lib/db.ts`(node:sqlite), `kopis.ts`, `extract.ts`, `queries.ts`, `app/api/*` 전부 삭제.
+  대신 `src/lib/supabase.ts`(anon 키 클라이언트) + `src/lib/data.ts`(조회 함수 모음)로 교체.
+- 모든 페이지를 client component로 바꿨다. 정적 export는 요청 시점 `searchParams`를 못 쓰기 때문에
+  (`/shows?state=...` 같은 서버 필터링이 불가능해짐) — 데이터를 통째로 불러온 뒤 필터/정렬은
+  브라우저에서 처리한다. 공연 수백 건 규모라 문제없다.
+- `/shows/[id]`, `/actors/[name]`처럼 라우트 세그먼트가 필요한 페이지는
+  `page.tsx`(`generateStaticParams`로 빌드 시점 id/배우 이름 목록을 훑어 라우트 껍데기만 생성) +
+  `*-client.tsx`(실제 내용은 여전히 브라우저에서 최신 데이터로 채움)로 분리했다.
+- KOPIS 동기화 버튼, `claude -p` 추출 다이얼로그 등 쓰기/AI 관련 UI는 전부 `backend/` 영역이라 제거.
+  애배 등록/해제만 브라우저에서 Supabase에 직접 쓴다.
+
+### GitHub Pages 배포
+
+- 저장소가 private이라 GitHub Pages(무료 플랜)를 쓸 수 없었다 → **public으로 전환**(사용자 확인
+  받음). 개인 일정 등 진짜 개인 데이터는 RLS로 보호되므로 저장소 공개 자체는 실질적 노출이 아니라고
+  판단.
+- `.github/workflows/deploy-web.yml` 추가 — `main`의 `web/**` 변경을 감지해 `next build`
+  (`output:'export'`, `basePath:'/performance-schedule-project'`) 후 `actions/deploy-pages`로 배포.
+  Supabase URL/anon 키는 저장소 시크릿(`SUPABASE_URL`/`SUPABASE_ANON_KEY`)으로 주입 — 둘 다
+  공개돼도 안전한 값(anon 키는 RLS로 보호됨).
+- 배포 URL: **https://lucy980616-prog.github.io/performance-schedule-project/**
+
+### 배포 후 Playwright로 실사용 검수 — 버그 3건 발견·수정
+
+1. **배우 상세 페이지 전부 404** — `generateStaticParams`에서 `encodeURIComponent`로 미리 인코딩한
+   값을 그대로 반환해, export된 HTML 파일명에 `%XX` 문자열이 리터럴로 박혀버렸다
+   (`%EA%B0%95....html`). 브라우저는 링크의 `%XX`를 표준적으로 디코딩해 요청하므로 실제 파일명
+   (`강필석.html`)과 어긋났다. → `generateStaticParams`에는 원문을 그대로 넘기도록 수정.
+2. **배우 이름이 인코딩된 문자열로 표시됨** — 1번을 고치자 파일은 찾아지는데, 정적 export는 서버가
+   없어 URL 세그먼트가 디코딩 안 된 채로 `params`에 들어온다는 걸 놓쳤다. 렌더링 시점에
+   `decodeURIComponent`를 다시 적용해 해결.
+3. **"애배 등록" 버튼이 새로고침해도 상태를 못 따라감** — `FavoriteToggle`이
+   `useState(initial)`로 최초 마운트 값만 캡처해서, 부모가 비동기로 즐겨찾기 목록을 불러온 뒤
+   `initial`이 바뀌어도 버튼은 계속 "애배 등록"으로 보였다. 이펙트로 동기화하는 대신, 사용자가
+   직접 누르기 전까지는 렌더링마다 `initial`을 그대로 쓰도록 고쳐 별도 동기화 코드 없이 해결.
+
+수정 후 재배포하여 오늘의 공연 → 공연 상세 → 캐스팅 달력 → 배우 상세 → 애배 등록/해제(Supabase
+쓰기까지)를 라이브 URL에서 전부 확인했다. 콘솔 에러 0건.
+
+### 남은 갭
+
+- **backend는 아직 SQLite에만 쓴다.** 오늘 옮긴 건 스냅샷 1회성 이관이고, 다음 수집 배치부터
+  자동으로 Supabase에 반영되게 하려면 `backend/src/shared/db.ts`(또는 각 모듈의 `load.ts`)를
+  `service_role` 키로 Supabase에 쓰도록 바꿔야 한다. 아직 안 함.
+- **로그인이 없다.** 애배/내 달력이 사실상 공용 상태. Supabase Auth 도입 전까지는 개인용으로만.
+- 폰 실기기 접속 미확인(데스크톱 브라우저로만 검수).

@@ -180,5 +180,9 @@ HEADFUL=1 ...                                    # 브라우저를 눈으로 보
 3. **멜론티켓 미조사.**
 4. **KOPIS 복구 시 재통합** — `modules/kopis/`는 그대로 남아 있다. 서비스가 복구되면 발견 축을
    NOL과 병행하거나 대체할 수 있다.
-5. **`web/` 연동** — 지금은 `backend/data/collector.db`에 쌓기만 한다. 웹앱에서 읽는 계층은
-   아직 없다 (Supabase 이관 여부는 `docs/03-final-architecture-plan.md` §4 참고).
+5. **`web/` 연동 — 반쪽만 됐다 (2026-09-09)** — `web/`은 이제 Supabase를 직접 읽어 실제로 뜬다
+   (https://lucy980616-prog.github.io/performance-schedule-project/, 자세한 경위는
+   `docs/03-final-architecture-plan.md` §11). 하지만 이 backend는 여전히 `data/collector.db`
+   (SQLite)에만 쓴다 — Supabase에 있는 데이터는 그 시점 SQLite 스냅샷을 1회성으로 옮긴 것이다.
+   다음 수집 배치부터 자동으로 반영되게 하려면 `shared/db.ts`(또는 각 모듈 `load.ts`)를
+   `service_role` 키로 Supabase에 쓰도록 바꿔야 한다.
